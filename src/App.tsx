@@ -17,11 +17,17 @@ function App() {
     function removeTask(id: string){
         setTask(tasks.filter( el => id !== el.id))
     }
-
     function addTasks(title:string){
         let newTask = {id: v1(), title:title, isDone: false}
         let newTasks = [newTask, ...tasks];
         setTask(newTasks)
+    }
+    const changeStatus = (taskId: string, isDone: boolean) =>{
+        let task = tasks.find(t=>t.id === taskId)
+        if(task){
+            task.isDone = isDone
+        }
+        setTask([...tasks]);
     }
 
     return (
@@ -29,7 +35,8 @@ function App() {
             <TodoList hat1={hat1}
                       tasks={tasks}
                       removeTask={removeTask}
-                      addTasks={addTasks}/>
+                      addTasks={addTasks}
+                      changeStatus={changeStatus}/>
         </div>
     );
 }
